@@ -1,6 +1,6 @@
 .PHONY: compile run clean
 
-compile:
+compile: clean
 	mkdir -p target/classes
 	javac -d target/classes src/*.java
 

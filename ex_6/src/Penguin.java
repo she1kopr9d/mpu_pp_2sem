@@ -24,4 +24,8 @@ public class Penguin extends Bird{
     public void hello(Penguin p){
         System.out.println("Привет, пингвин! Я пингвин!");
     }
+
+    public void hello(Sparrow s){
+        System.out.println("Привет, воробей " + s.getName() + "! Я пингвин!");
+    }
 }

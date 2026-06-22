@@ -44,4 +44,8 @@ public class Parrot extends Bird{
     public void hello(Penguin p){
         System.out.println("Привет, попугай! Я попугай, меня зовут " + this.name + "!");
     }
+
+    public void hello(Sparrow s){
+        System.out.println("Привет, воробей " + s.getName() + "! Я попугай!");
+    }
 }

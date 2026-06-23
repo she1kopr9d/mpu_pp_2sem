@@ -2,7 +2,7 @@
 
 compile: clean
 	mkdir -p target/classes
-	javac -d target/classes src/*.java
+	find src -name "*.java" -exec javac -d target/classes {} +
 
 run: compile
 	java -cp target/classes Main

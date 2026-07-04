@@ -18,7 +18,9 @@ abstract public class Bird extends Entity implements IRandomable{
         java.lang.System.out.println("Я птица.");
         //java.lang.System.out.println("Я птица." + " Всего птиц: " + count + ".");
         Position pos = new Position(0, 0);
-        Size size = new Size(rand.nextInt(100), rand.nextInt(100));
+        int m1 = rand.nextInt(50, 100);
+        int m2 = rand.nextInt(m1, 100);
+        Size size = new Size(m1, m2);
         super.addComponent(pos);
         super.addComponent(size);
         super.addComponent(new Sprite((screen, brush) -> {
@@ -35,7 +37,7 @@ abstract public class Bird extends Entity implements IRandomable{
     @Override
     public void randomize() {
         Position pos = super.getComponent(Position.class);
-        pos.setPoint(new Point(rand.nextInt(800), rand.nextInt(600)));
+        pos.setPoint(new Point(rand.nextInt(600), rand.nextInt(400)));
 
     }
 

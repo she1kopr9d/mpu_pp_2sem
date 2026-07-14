@@ -1,0 +1,9 @@
+Run X
+Run Y
+Run Z
+Alt Tab +
+Alt Tab Tab + +
+Alt Delete +
+Run Y
+Alt Delete +
+Alt Tab +

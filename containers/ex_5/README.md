@@ -49,3 +49,29 @@ int eraseFront() throws Exception;
 
 ### Список проделанных действий
 
+- Сделал ссылочную реализацию ограниченного двусвязного списка целых чисел на
+основе трех одномерных статических массивов L2List.
+
+- Сгенерировал через Нейросеть (DeepSeek) тесты для проверки верной работоспособности L2List.
+
+- Проверил корректность написанного кода нейросетью.
+
+### Вывод программы
+
+```bash
+testEmpty: OK
+testInsertBackAndForward: OK
+testInsertFrontAndBackward: OK
+testEraseBack: OK
+testEraseFront: OK
+testAfterBefore: OK
+testExceptions: OK
+testOverflow: OK
+testClear: OK
+testMixedOperations: OK
+Прямой порядок (ожидается 1 2 3 4 5): 1 2 3 4 5 
+Обратный порядок (ожидается 5 4 3 2 1): 5 4 3 2 1 
+testPrintOrder: OK (проверьте вывод выше)
+
+Все тесты пройдены успешно!
+```

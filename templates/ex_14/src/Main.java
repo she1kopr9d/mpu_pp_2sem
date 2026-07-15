@@ -9,7 +9,7 @@ public class Main {
     }
 
     private static void ex_2(){
-
+        PhoneBook.start();
     }
 
     public static void main(String[] args) {

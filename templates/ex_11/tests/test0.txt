@@ -1,0 +1,7 @@
+Run Mozilla Firefox
+Run IntelliJ IDEA
+Alt Tab +
+Run UMLet
+Alt Tab Tab + +
+Alt Tab Tab Tab + + +
+Alt Delete +

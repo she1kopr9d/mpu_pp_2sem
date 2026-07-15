@@ -20,4 +20,5 @@
 - Написал класс WordFrequencyAnalyzer.java, который имеет метод static void analyze(String inputFile, String outputFile) throws IOException. Данный метод выполняет задание 1 (1).
 
 [Исходный файл текста](./data/input.txt)
+
 [Итоговый результат программы](./data/output.txt)

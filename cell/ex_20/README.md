@@ -19,8 +19,7 @@
 @Override
 public void paint(Graphics g){
     super.paint(g);
-    //g.clearRect(-width/2, height/2, width, height); //очистка экрана, если нет
-    буферизации
+    //g.clearRect(-width/2, height/2, width, height); //очистка экрана, если нет буферизации
     BufferedImage bufferedImage = new BufferedImage(width, height,
     BufferedImage.TYPE_INT_ARGB);
     Graphics g2 = bufferedImage.createGraphics(); //или Graphics2D

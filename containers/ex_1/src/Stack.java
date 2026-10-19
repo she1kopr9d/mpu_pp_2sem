@@ -1,10 +1,10 @@
-class Stack<T> {
+class Stack{
     private static final int DEFSIZE = 16;
-    private Object[] array;
+    private int[] array;
     private int head;
 
     public Stack(int capacity) {
-        array = new Object[capacity];
+        array = new int[capacity];
         head = 0;
     }
 
@@ -20,24 +20,15 @@ class Stack<T> {
         head = 0;
     }
 
-    public void push(T val) throws Exception {
-        if (head == array.length) {
-            throw new Exception("Stack overflow");
-        }
+    public void push(int val) throws Exception {
         array[head++] = val;
     }
 
-    public T pop() throws Exception {
-        if (head == 0) {
-            throw new Exception("Stack underflow");
-        }
-        return (T) array[--head];
+    public int pop() throws Exception {
+        return array[--head];
     }
 
-    public T top() throws Exception {
-        if (head == 0) {
-            throw new Exception("Stack underflow");
-        }
-        return (T) array[head - 1];
+    public int top() throws Exception {
+        return array[head - 1];
     }
 }

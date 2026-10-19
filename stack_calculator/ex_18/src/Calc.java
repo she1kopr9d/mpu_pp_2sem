@@ -7,6 +7,15 @@ public class Calc extends Compf{
         return(int)c - (int)'0';
     }
 
+    private static int string2int(String s) {
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            result = result * 10 + (c - '0');
+        }
+        return result;
+    }
+
     @Override
     protected int symOther(char c){
         if(c < '0' || c > '9'){
@@ -42,7 +51,11 @@ public class Calc extends Compf{
     @Override
     protected void nextOther(char c){
         s.push(char2int(c));
-        //s.push(Character.getNumericValue(c));
+    }
+
+    @Override
+    protected void nextOther(String c){
+        s.push(string2int(c));
     }
 
     public Calc(){

@@ -6,7 +6,7 @@ public class Compf extends Stack{
                                SYM_OPER = 2,
                                SYM_OTHER = 3;
 
-    private int _last_move = -1;
+    private int _last_move = SYM_LEFT;
     private StringBuilder _buffer;
 
     private Stack _brackets = new Stack();
@@ -49,6 +49,16 @@ public class Compf extends Stack{
         }
     }
 
+    private boolean isUnary(char operator){
+        if (operator != '+' && operator != '-'){
+            return false;
+        }
+        if (_last_move != SYM_LEFT){
+            return false;
+        }
+        return true;
+    }
+
     private void processSymbol(char c){
         int move = symType(c);
         if ((move != SYM_OTHER) && (_last_move == SYM_OTHER)){
@@ -56,8 +66,8 @@ public class Compf extends Stack{
         }
         switch(move){
             case SYM_LEFT:
-                push(c);
                 _brackets.push(c);
+                push(c);
                 break;
             case SYM_RIGHT:
                 checkBrackets(c);
@@ -65,6 +75,9 @@ public class Compf extends Stack{
                 pop();
                 break;
             case SYM_OPER:
+                if (isUnary(c)){
+                    nextOper('0');
+                }
                 processSuspendedSymbols(c);
                 push(c);
                 break;

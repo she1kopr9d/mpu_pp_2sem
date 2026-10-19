@@ -9,11 +9,21 @@ public class Compf extends Stack{
     private int _last_move = -1;
     private StringBuilder _buffer;
 
+    private Stack _brackets = new Stack();
+
+    private static boolean checkPair(char open, char close){
+        return (open == '(' && close == ')') || (open == '[' && close == ']') || (open == '{' && close == '}');
+    }
+
     private int symType(char c){
         switch(c){
             case '(':
+            case '[':
+            case '{':
                 return SYM_LEFT;
             case ')':
+            case ']':
+            case '}':
                 return SYM_RIGHT;
             case '+':
             case '-':
@@ -25,6 +35,20 @@ public class Compf extends Stack{
         }
     }
 
+    private void checkBrackets(char c){
+        try{
+            char open = _brackets.pop();
+            if (!checkPair(open, c)){
+                System.out.println("Недопустимая последовательность скобок");
+                System.exit(0);
+            }
+        }
+        catch (Exception e){
+            System.out.println("Недопустимая последовательность скобок");
+            System.exit(0);
+        }
+    }
+
     private void processSymbol(char c){
         int move = symType(c);
         if ((move != SYM_OTHER) && (_last_move == SYM_OTHER)){
@@ -33,8 +57,10 @@ public class Compf extends Stack{
         switch(move){
             case SYM_LEFT:
                 push(c);
+                _brackets.push(c);
                 break;
             case SYM_RIGHT:
+                checkBrackets(c);
                 processSuspendedSymbols(c);
                 pop();
                 break;

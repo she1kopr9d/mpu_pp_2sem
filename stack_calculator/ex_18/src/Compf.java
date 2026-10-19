@@ -16,8 +16,12 @@ public class Compf extends Stack<Character>{
     private int symType(char c){
         switch(c){
             case '(':
+            case '[':
+            case '{':
                 return SYM_LEFT;
             case ')':
+            case ']':
+            case '}':
                 return SYM_RIGHT;
             case '+':
             case '-':

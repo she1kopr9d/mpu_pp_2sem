@@ -77,7 +77,7 @@ public class Compf extends Stack<Character>{
                 break;
             case SYM_OPER:
                 if (isUnary(c)){
-                    nextOper('0');
+                    nextOther('0');
                 }
                 processSuspendedSymbols(c);
                 push(c);

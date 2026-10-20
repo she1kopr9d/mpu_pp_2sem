@@ -1,6 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Locale;
 
 class ConvexWithFile extends Convex implements AutoCloseable {
@@ -8,6 +10,10 @@ class ConvexWithFile extends Convex implements AutoCloseable {
 
     public ConvexWithFile(String fileName) throws IOException {
         super();
+        Path parent = Path.of(fileName).getParent();
+        if (parent != null) {
+            Files.createDirectories(parent);
+        }
         this._out = new PrintWriter(new FileWriter(fileName, true));
     }
 

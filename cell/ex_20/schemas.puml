@@ -1,18 +1,11 @@
 @startuml
-!pragma layout smetana
 skinparam classAttributeIconSize 0
 skinparam nodesep 60
 skinparam ranksep 90
 skinparam ArrowThickness 1.5
 skinparam shadowing false
 
-' ============================================================
-' Внешние классы
-' ============================================================
 
-' ============================================================
-' Основной поток приложения
-' ============================================================
 class Main {
     - {static} String generateFileName()
     - {static} void initializationWindow(Window[] panelHolder, ConvexWithFile convex, String fileName)
@@ -36,9 +29,6 @@ class Window {
     - void drawVertex(Graphics2D g2, R2Point p, double cx, double cy, double scale, int w, int h)
 }
 
-' ============================================================
-' Геометрия
-' ============================================================
 class Convex {
     - Figure fig
     + Convex()
@@ -107,40 +97,21 @@ class R2Point {
     + {static} boolean isTriangle(R2Point a, R2Point b, R2Point c)
 }
 
-' ============================================================
-' Наследование
-' ============================================================
 ConvexWithFile --|> Convex
-
-' ============================================================
-' Реализация Figure
-' ============================================================
 Void --|> Figure
 Point --|> Figure
 Segment --|> Figure
 Polygon --|> Figure
 
-' ============================================================
-' Композиция
-' ============================================================
 Convex *-- Figure
 
-' ============================================================
-' Ассоциации основного потока
-' ============================================================
 Main --> ConvexWithFile : создаёт
 Main --> Window : создаёт
 Window --> Convex : использует
 
-' ============================================================
-' Зависимости на R2Point
-' ============================================================
 Polygon --> "0..*" R2Point : _container
 Convex ..> R2Point : возвращает
 
-' ============================================================
-' Ряд реализаций Figure под интерфейсом
-' ============================================================
 Void -[hidden]right-> Point
 Point -[hidden]right-> Segment
 Segment -[hidden]right-> Polygon

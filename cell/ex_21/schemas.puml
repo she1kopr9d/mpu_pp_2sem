@@ -1,0 +1,134 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam nodesep 60
+skinparam ranksep 90
+skinparam shadowing false
+
+class Main {
+    - {static} String generateFileName()
+    - {static} void initializationWindow(Window[] panelHolder, ConvexWithFile convex, String fileName)
+    + {static} void main(String[] args)
+}
+
+class ConvexWithFile {
+    - PrintWriter _out
+    + ConvexWithFile(String fileName)
+    + void add(R2Point p)
+    + void close()
+}
+
+class Convex {
+    - Figure fig
+    - ArrayList<Plugin> _plugins
+    + Convex()
+    + void includePlugin(Plugin plugin)
+    + void includePlugin(Plugin[] plugins)
+    + void add(R2Point p)
+    + double area()
+    + double perimeter()
+    + R2Point[] getPoints()
+}
+
+class Window {
+    - Convex _convex
+    + Window(Convex convex)
+    # void paintComponent(Graphics g)
+    - void drawScene(Graphics2D g2, int w, int h)
+    - int screenX(double x, double cx, double scale, int w)
+    - int screenY(double y, double cy, double scale, int h)
+    - void drawVertex(Graphics2D g2, R2Point p, double cx, double cy, double scale, int w, int h)
+}
+
+abstract class Plugin {
+    + void PostAdd(R2Point[] points)
+}
+
+class Plugin6 {
+    + void PostAdd(R2Point[] points)
+}
+
+interface Figure {
+    + double perimeter()
+    + double area()
+    + Figure add(R2Point p)
+    + R2Point[] getPoints()
+}
+
+class Void {
+    + double perimeter()
+    + double area()
+    + Figure add(R2Point p)
+    + R2Point[] getPoints()
+}
+
+class Point {
+    - R2Point p
+    + double perimeter()
+    + double area()
+    + Figure add(R2Point q)
+    + R2Point[] getPoints()
+}
+
+class Segment {
+    - R2Point p
+    - R2Point q
+    + double perimeter()
+    + double area()
+    + Figure add(R2Point r)
+    + R2Point[] getPoints()
+}
+
+class Polygon {
+    - double s
+    - double p
+    - ArrayDeque<R2Point> _container
+    + Polygon(R2Point a, R2Point b, R2Point c)
+    + double perimeter()
+    + double area()
+    - void grow(R2Point a, R2Point b, R2Point t)
+    + Figure add(R2Point t)
+    + R2Point[] getPoints()
+}
+
+class R2Point {
+    - double x
+    - double y
+    + R2Point(double x, double y)
+    + R2Point()
+    + double getX()
+    + double getY()
+    + boolean equals(Object obj)
+    + int hashCode()
+    + boolean inside(R2Point a, R2Point b)
+    + boolean light(R2Point a, R2Point b)
+    + {static} double dist(R2Point a, R2Point b)
+    + {static} double area(R2Point a, R2Point b, R2Point c)
+    + {static} boolean isTriangle(R2Point a, R2Point b, R2Point c)
+}
+
+ConvexWithFile --|> Convex
+
+Void --|> Figure
+Point --|> Figure
+Segment --|> Figure
+Polygon --|> Figure
+
+Convex *-- Figure : fig
+Convex --> "0..*" Plugin : _plugins
+
+Plugin6 --|> Plugin
+
+Main --> ConvexWithFile : создаёт
+Main --> Window : создаёт
+Main ..> Plugin6 : создаёт
+
+Window --> Convex : использует
+
+Polygon --> "0..*" R2Point : _container
+Convex ..> R2Point : возвращает
+
+Void -[hidden]right-> Point
+Point -[hidden]right-> Segment
+Segment -[hidden]right-> Polygon
+
+@enduml

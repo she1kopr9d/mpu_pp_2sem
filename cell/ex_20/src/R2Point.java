@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 //Класс, описывающий точку (Point) на плоскости (R2).
@@ -25,8 +26,24 @@ class R2Point{
         return 0.5*((a.x - c.x)*(b.y - c.y) - (a.y - c.y)*(b.x - c.x));
     }
 
-    public static boolean equal(R2Point a, R2Point b){
-        return a.x == b.x && a.y == b.y;
+    // public static boolean equal(R2Point a, R2Point b){
+    //     return a.x == b.x && a.y == b.y;
+    // }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof R2Point))
+            return false;
+        R2Point other = (R2Point) obj;
+        return Double.compare(x, other.x) == 0
+            && Double.compare(y, other.y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     public static boolean isTriangle(R2Point a, R2Point b, R2Point c){

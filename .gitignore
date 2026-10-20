@@ -1,3 +1,4 @@
 target/
 phonebook.txt
 .DS_Store
+logs/

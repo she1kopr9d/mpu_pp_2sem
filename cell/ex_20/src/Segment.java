@@ -1,4 +1,4 @@
-//Класс "Двуугольник", реализующий интерфейс фигуры.
+
 class Segment implements Figure{
     private R2Point p, q;
 
@@ -26,5 +26,11 @@ class Segment implements Figure{
             p = r;
 
         return this;
+    }
+
+    @Override
+    public R2Point[] getPoints() {
+        R2Point[] points = new R2Point[] {p, q};
+        return points;
     }
 }

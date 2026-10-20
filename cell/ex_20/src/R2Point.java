@@ -18,8 +18,8 @@ class R2Point{
         y = in.nextDouble();
     }
 
-    public double getX() { return x; };
-    public double getY() { return y; };
+    public double getX() { return x; }
+    public double getY() { return y; }
 
     public static double dist(R2Point a, R2Point b){
         return Math.sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));

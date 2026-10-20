@@ -1,4 +1,3 @@
-//Класс "Одноугольник", реализующий интерфейс фигуры.
 class Point implements Figure{
     private R2Point p;
 
@@ -19,5 +18,11 @@ class Point implements Figure{
             return new Segment(p, q);
         else
             return this;
+    }
+
+    @Override
+    public R2Point[] getPoints() {
+        R2Point[] points = new R2Point[] {p};
+        return points;
     }
 }

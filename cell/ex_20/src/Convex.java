@@ -17,4 +17,8 @@ class Convex{
     public double perimeter(){
         return fig.perimeter();
     }
+
+    public R2Point[] getPoints() {
+        return fig.getPoints();
+    }
 }

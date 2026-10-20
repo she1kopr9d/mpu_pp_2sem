@@ -64,4 +64,9 @@ class Polygon implements Figure{
 
         return this;
     }
+
+    @Override
+    public R2Point[] getPoints() {
+        return _container.toArray(new R2Point[0]);
+    }
 }

@@ -1,17 +1,20 @@
+import java.util.ArrayDeque;
+
 //Класс "Многоугольник", реализующий интерфейс фигуры.
-class Polygon extends Deq implements Figure{
+class Polygon implements Figure{
     private double s, p;
+    private ArrayDeque<R2Point> _container = new ArrayDeque<>();
 
     public Polygon(R2Point a, R2Point b, R2Point c){
-        pushFront(b);
+        _container.addFirst(b);
 
         if (b.light(a, c)){
-            pushFront(a);
-            pushBack(c);
+            _container.addFirst(a);
+            _container.addLast(c);
         }
         else{
-            pushFront(c);
-            pushBack(a);
+            _container.addFirst(c);
+            _container.addLast(a);
         }
 
         p = R2Point.dist(a, b) + R2Point.dist(b, c)+ R2Point.dist(c, a);
@@ -34,29 +37,29 @@ class Polygon extends Deq implements Figure{
     public Figure add(R2Point t){
         int i;
         //Ищем освещенные ребра, просматривая их одно за другим.
-        for(i = length(); i>0 && !t.light(back(), front()); i--)
-            pushBack(popFront());
+        for(i = _container.size(); i>0 && !t.light(_container.peekLast(), _container.peekFirst()); i--)
+            _container.addLast(_container.removeFirst());
 
         //УТВЕРЖДЕНИЕ:
         //либо ребро [back(), front()] освещено из t,
         //либо освещенных ребер нет совсем.
         if (i>0){
             R2Point x;
-            grow(back(), front(), t);
+            grow(_container.peekLast(), _container.peekFirst(), t);
 
             //Удаляем все освещенные ребра из начала дека.
-            for(x = popFront(); t.light(x, front()); x = popFront())
-                grow(x, front(), t);
-            pushFront(x);
+            for(x = _container.removeFirst(); t.light(x, _container.peekFirst()); x = _container.removeFirst())
+                grow(x, _container.peekFirst(), t);
+            _container.addFirst(x);
 
             //Удаляем все освещенные ребра из конца дека.
-            for (x = popBack(); t.light(back(), x); x = popBack())
-                grow(back(), x, t);
-            pushBack(x);
+            for (x = _container.removeLast(); t.light(_container.peekLast(), x); x = _container.removeLast())
+                grow(_container.peekLast(), x, t);
+            _container.addLast(x);
 
             //Завершаем обработку добавляемой точки.
-            p += R2Point.dist(back(), t) + R2Point.dist(t, front());
-            pushFront(t);
+            p += R2Point.dist(_container.peekLast(), t) + R2Point.dist(t, _container.peekFirst());
+            _container.addFirst(t);
         }
 
         return this;
